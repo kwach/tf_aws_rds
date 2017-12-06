@@ -71,7 +71,7 @@ resource "aws_db_subnet_group" "main_db_subnet_group" {
 
 # Security groups
 resource "aws_security_group" "main_db_access" {
-  name = "Database access"
+  name = "tf-${var.rds_instance_identifier}"
   description = "Allow access to the database"
   vpc_id = "${var.rds_vpc_id}"
 
