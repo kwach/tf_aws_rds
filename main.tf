@@ -47,16 +47,17 @@ resource "aws_db_parameter_group" "main_rds_instance" {
     name = "${var.rds_instance_identifier}-${replace(var.db_parameter_group, ".", "")}-custom-params"
     family = "${var.db_parameter_group}"
 
+    parameter = ["${var.pg_params}"]
+
     # Example for MySQL
-    # parameter {
+    # parameter = [{
     #   name = "character_set_server"
     #   value = "utf8"
-    # }
-
-    # parameter {
+    # }, 
+    # {
     #   name = "character_set_client"
     #   value = "utf8"
-    # }
+    # }]
 
     tags = "${merge(var.tags, map("Name", format("%s", var.rds_instance_identifier)))}"
 }

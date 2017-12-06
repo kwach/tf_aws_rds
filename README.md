@@ -33,6 +33,7 @@ This module makes the following assumptions:
 - `copy_tags_to_snapshot` - copy all tags from RDS database to snapshot (default `true`)
 - `backup_retention_period` - backup retention period in days (default: 0), must be `> 0` to enable backups
 - `backup_window` - when to perform DB snapshot, default "22:00-03:00"; can't overlap with maintenance window
+- `pg_params` - mapping of params you want to override AWS defaults in Parameter Group
 - `tags` - A mapping of tags to assign to the resource.
 
 ## Outputs
@@ -107,6 +108,12 @@ module "my_rds_instance" {
     subnets = ["${aws_subnet.example.*.id}"] # see above
     rds_vpc_id = "${module.vpc}"
     private_cidr = "${var.private_cidr}"
+
+    pg_params = [{
+      name = "max_connections"
+      apply_method = "pending-reboot"
+      value = "200"
+    }]
 
     tags {
         "Terraform" = "true"

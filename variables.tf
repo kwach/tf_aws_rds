@@ -121,3 +121,8 @@ variable "tags" {
   description = "A map of tags to add to all resources"
   default     = {}
 }
+
+variable "pg_params" {
+  description = "Parameters for parameter group passed as a list of objects [{...},{...}]"
+  default = []
+}
