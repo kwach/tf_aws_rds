@@ -88,7 +88,14 @@ variable "subnets" {
 
 variable "private_cidr" {
     description = "VPC private addressing, used for a security group"
+    #type = "string"
+    default = []
+}
+
+variable "src_security_group" {
+    description = "Ingress security group name used for a security group"
     type = "string"
+    default = ""
 }
 
 variable "rds_vpc_id" {
